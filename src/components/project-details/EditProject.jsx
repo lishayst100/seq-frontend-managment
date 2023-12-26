@@ -100,7 +100,7 @@ const handleRemovePreviewImage = (index) => {
   }
 
     try {
-      const response = await fetch(`http://localhost:3001/api/projects/myUpdateProject/${id}`, {
+      const response = await fetch(`${BASE_URL}/myUpdateProject/${id}`, {
         method: 'PUT',
         body: formData,
        

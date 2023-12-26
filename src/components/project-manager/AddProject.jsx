@@ -6,6 +6,7 @@ import TextArea from "./TextArea";
 import UploadImage from "./UploadImage";
 import { ProjectContext } from "../../context/ProjectContext";
 import {ColorRing} from 'react-loader-spinner'
+import { BASE_URL } from "../../services/utils";
 
 
 const AddProject = () => {
@@ -33,7 +34,7 @@ const AddProject = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3001/api/projects/addProject",
+        `${BASE_URL}/addProject`,
         {
           method: "POST",
           body: formData,
