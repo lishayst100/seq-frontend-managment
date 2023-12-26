@@ -38,7 +38,7 @@ const AddProject = () => {
         {
           method: "POST",
           body: formData,
-          mode: 'no-cors'
+          
         }
       );
 
