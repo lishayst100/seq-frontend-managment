@@ -1,40 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BASE_URL } from '../../services/utils';
+import { BASE_URL_TEAM } from '../../services/utils';
+import Swal from 'sweetalert2';
+import { ColorRing } from 'react-loader-spinner';
 import Input from '../project-manager/Input';
 import TextArea from '../project-manager/TextArea';
 import UrlImages from '../project-manager/UrlImages';
-import { ProjectContext } from '../../context/ProjectContext';
-import Swal from 'sweetalert2';
-import { ColorRing } from 'react-loader-spinner';
-import ImagesPreview from './ImagesPreview';
-import CheckBox from '../project-manager/CheckBox';
-import CheckBoxEdit from '../project-manager/CheckBoxEdit';
+import ImagesPreview from '../project-details/ImagesPreview';
 
-const EditProject = () => {
+
+const EditTeam = () => {
   const {id} = useParams()
   const [images, setImages] = useState([]);
   const [urlImages , setUrlImages] = useState([])
   const [title, setTitle] = useState('');
-  const [credits, setCredits] = useState('');
-  const [link, setLink] = useState('');
-  const [linkId, setLinkId] = useState('');
+  const [desc, setDesc] = useState('');
+  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [checkGenres, setCheckGenres] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-  const {getProjects} = useContext(ProjectContext)
   const nav = useNavigate();
   
-const getProject = () => {
-  fetch(`${BASE_URL}/getOneProject/${id}`)
+const getTeam = () => {
+  fetch(`${BASE_URL_TEAM}/${id}`)
   .then(res => res.json())
   .then(result => {
     setTitle(result.title)
-    setCredits(result.credits)
-    setUrlImages(result.images)
-    setLink(result.link)
-    setLinkId(result.linkId)
-    setCheckGenres(result.genres)
+    setName(result.name)
+    setUrlImages(result.img)
+    setDesc(result.desc)
+   
   }).catch(err => console.log(err.message))
 }
 
@@ -59,7 +53,7 @@ const handleRemovePreviewImage = (index) => {
 
 
   useEffect(()=>{
-    getProject()
+    getTeam()
     
   },[])
 
@@ -94,17 +88,14 @@ const handleRemovePreviewImage = (index) => {
     for (let i = 0; i < urlImages.length; i++) {
       formData.append('urlImages', urlImages[i]);
     }
-    checkGenres.forEach((genre) => {
-      formData.append("genres", genre);
-    })
+    
     formData.append('title', title);
-    formData.append('credits', credits);
-    formData.append('link', link);
-    formData.append('linkId', linkId);
+    formData.append('name', name);
+    formData.append('desc', desc);
     
 
     try {
-      const response = await fetch(`${BASE_URL}/myUpdateProject/${id}`, {
+      const response = await fetch(`${BASE_URL_TEAM}/updateTeam/${id}`, {
         method: 'PUT',
         body: formData,
        
@@ -119,8 +110,8 @@ const handleRemovePreviewImage = (index) => {
           icon: "success",
         });
         setIsLoading(false);
-        nav("/");
-        getProjects()
+        nav("/team");
+        
       } else {
         console.error('Failed to update project');
         setIsLoading(false)
@@ -141,7 +132,7 @@ const handleRemovePreviewImage = (index) => {
 
   return (
     <div className='py-5'>
-      <h2>Edit Project</h2>
+      <h2>Edit {name}</h2>
       <form
       onSubmit={handleSubmit}
         className="container mx-auto d-flex flex-column gap-3 w-75 shadow-lg p-4 rounded-4">
@@ -149,11 +140,10 @@ const handleRemovePreviewImage = (index) => {
           {isLoading ? "Updating your Project..." : "Update Project"}
         </button>
         {isLoading && <ColorRing width={'100%'}/>}
+       
+        <Input label={"Name"} setState={setName} value={name} />
         <Input label={"Title"} setState={setTitle} value={title} />
-        <Input label={"Link"} setState={setLink} value={link} />
-        <Input label={"Link ID"} setState={setLinkId} value={linkId} />
-        <TextArea setState={setCredits} value={credits} label={'Credits'}/>
-        <CheckBoxEdit checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
+        <TextArea setState={setDesc} value={desc} label={'Descripation'} />
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
       </form>
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
@@ -163,4 +153,4 @@ const handleRemovePreviewImage = (index) => {
   );
 };
 
-export default EditProject;
+export default EditTeam;

@@ -1,23 +1,24 @@
 import React, { useState,useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Input from "./Input";
-import TextArea from "./TextArea";
-import UploadImage from "./UploadImage";
+
 import { ProjectContext } from "../../context/ProjectContext";
 import {ColorRing} from 'react-loader-spinner'
-import { BASE_URL } from "../../services/utils";
-import CheckBox from "./CheckBox";
+import { BASE_URL, BASE_URL_TEAM } from "../../services/utils";
+import Input from "../project-manager/Input";
+import TextArea from "../project-manager/TextArea";
+import UploadImage from "../project-manager/UploadImage";
 
 
-const AddProject = () => {
+
+const AddTeam = () => {
   const [images, setImages] = useState([]);
   const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
-  const [credits, setCredits] = useState("");
-  const [linkId, setLinkId] = useState("");
-  const [checkGenres, setCheckGenres] = useState([]);
-  const {getProjects} = useContext(ProjectContext)
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  
+  
+ 
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
 
@@ -25,9 +26,7 @@ const AddProject = () => {
   
 
 
-  useEffect(()=>{
-    console.log(checkGenres)
-  },[checkGenres])
+
 
   const handleSubmit = async (event) => {
     setIsLoading(true)
@@ -37,17 +36,15 @@ const AddProject = () => {
     images.forEach((image) => {
       formData.append("images", image);
     });
-    checkGenres.forEach((genre) => {
-      formData.append("genres", genre);
-    })
+    
     formData.append("title", title);
-    formData.append("link", link);
-    formData.append("credits", credits);
-    formData.append("linkId", linkId);
+    formData.append("name", name);
+    formData.append("desc", desc);
+
 
     try {
       const response = await fetch(
-        `${BASE_URL}/addProject`,
+        `${BASE_URL_TEAM}/addTeam`,
         {
           method: "POST",
           body: formData,
@@ -64,8 +61,8 @@ const AddProject = () => {
           icon: "success",
         });
         setIsLoading(false);
-        nav("/");
-        getProjects()
+        nav("/team");
+       
         
       } else {
         setIsLoading(false)
@@ -91,7 +88,7 @@ const AddProject = () => {
 
   return (
     <div>
-      <h2>New Project</h2>
+      <h2>New Team</h2>
       <form
         onSubmit={handleSubmit}
         className="container mx-auto d-flex flex-column gap-3 w-75 shadow-lg p-4 rounded-4">
@@ -99,16 +96,17 @@ const AddProject = () => {
           {isLoading ? "Adding your Project..." : "Add Project"}
         </button>
         {isLoading && <ColorRing width={'100%'}/>}
+       
+        <Input label={"Name"} setState={setName} value={name} />
         <Input label={"Title"} setState={setTitle} value={title} />
-        <Input label={"Link"} setState={setLink} value={link} />
-        <Input label={"Link ID"} setState={setLinkId} value={linkId} />
-        <TextArea setState={setCredits} value={credits} label={'Credits'} />
-        <CheckBox checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
-        <UploadImage setImages={setImages} images={images}/>
         
+        <TextArea setState={setDesc} value={desc} label={'Descripation'} />
+     
+        <UploadImage setImages={setImages} images={images}/>
+         
       </form>
     </div>
   );
 };
 
-export default AddProject;
+export default AddTeam;

@@ -1,16 +1,16 @@
 import React from 'react'
 
-const TextArea = ({value,setState}) => {
+const TextArea = ({value,setState,label}) => {
   return (
     <div className='d-flex flex-column align-items-start'>
-  <label>Credits:</label>
+  <label>{label}:</label>
   <textarea
     
     rows={15}
     className='form-control'
     value={value}
     onChange={(e) => setState(e.target.value)}
-    placeholder="Credits"
+    placeholder={label}
   ></textarea>
 </div>
   )
