@@ -5,11 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ProjectContextProvider from './context/ProjectContext';
+import OtherNavbar from './components/navbar/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ProjectContextProvider>
+      <OtherNavbar/>
       <App />
     </ProjectContextProvider>
   </BrowserRouter>

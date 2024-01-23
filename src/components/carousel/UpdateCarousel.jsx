@@ -101,7 +101,7 @@ const UpdateCarousel = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="d-flex flex-column gap-5">
+      <form onSubmit={handleSubmit} className="d-flex flex-column gap-5 justify-content-center align-items-center">
         <ImagesPreview
           handleFileChange={handleFileChange}
           previewImages={previewImages}

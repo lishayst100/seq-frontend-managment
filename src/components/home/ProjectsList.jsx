@@ -12,8 +12,8 @@ const ProjectsList = () => {
         {projects.length === 0 && <h4>No Projects Found</h4>}
         {
           projects.length > 0 &&  projects.map(project => (
-                <div key={project._id} className='shadow-lg p-4 rounded d-flex flex-column gap-4'>
-                    <h2>{project.title}</h2>
+                <div key={project._id} className='shadow-lg p-4 rounded d-flex flex-column gap-4' >
+                    <span>{project.title}</span>
                     <img className='rounded' src={project.images[0]} alt="" width={200} height={200} onClick={()=>{nav(`project/${project._id}`)}}/>
                     <div className='d-flex justify-content-between '>
                     <DeleteProjectBtn id={project._id}/>

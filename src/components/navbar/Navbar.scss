@@ -1,0 +1,33 @@
+
+.otherNavbar{
+    justify-content: space-between; 
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    padding: 20px;
+    background-color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 1000;
+  }
+
+
+  .links-social {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+    width: 100%;
+    gap: 20px;
+    font-family: 'Gothic-Bold';
+    font-size: 19px;
+  }
+
+  .link{
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .selected{
+    color: rgb(62, 5, 255);
+    transition: 0.3s;
+  }
