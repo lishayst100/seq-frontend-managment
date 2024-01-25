@@ -42,14 +42,14 @@ const UpdateCarousel = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Project updated:", data.updatedcarousel);
+        console.log("Carousel updated:", data.updatedcarousel);
         Swal.fire({
           title: "Good job!",
-          text: "Project Successfully Added!",
+          text: "Carousel Successfully Updated!",
           icon: "success",
         });
         setIsLoading(false);
-        nav("/");
+        nav("/carousel");
       } else {
         console.error("Failed to update project");
         setIsLoading(false);

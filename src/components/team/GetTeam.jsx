@@ -29,8 +29,8 @@ const GetTeam = () => {
                 <div key={t._id} className='shadow-lg p-4 d-flex flex-column justify-content-center align-items-center gap-3'>
                     <p>{t.name}</p>
                     <p>{t.title}</p>
-                    <pre>{t.desc}</pre>
-                    <img src={t.img[0]} width={300} height={300} alt="..." />
+                    <p>{t.desc}</p>
+                    <img src={t.img[0]} width={300} height={300} alt="..." className='img-fluid' />
                     
                     <div className='d-flex gap-3 justify-content-center align-items-center'>
                     <DeleteBtn id={t._id} setTeam={setTeam}/>
