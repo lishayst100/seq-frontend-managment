@@ -14,6 +14,10 @@ import UpdateCarousel from './components/carousel/UpdateCarousel';
 import AddTeam from './components/team/AddTeam';
 import GetTeam from './components/team/GetTeam';
 import EditTeam from './components/team/EditTeam';
+import AddText from './components/textAbout/AddText';
+import GetText from './components/textAbout/GetTextt';
+import EditText from './components/textAbout/EditTextt';
+
 
 
 
@@ -39,6 +43,10 @@ function App() {
         <Route path='/add-team' element={<AddTeam/>}/>
         <Route path='/team' element={<GetTeam/>}/>
         <Route path='/edit-team/:id' element={<EditTeam/>}/>
+        {/* Text */}
+        <Route path='/add-text' element={<AddText/>}/>
+        <Route path='/text' element={<GetText/>}/>
+        <Route path='/edit-text/:id' element={<EditText/>}/>
       </Routes>
       {/* <ImageUpload/> */}
       

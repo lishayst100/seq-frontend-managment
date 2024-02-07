@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProjectsList from './ProjectsList'
+import ProjectList from './LoadMore'
 
 
 const Home = () => {
