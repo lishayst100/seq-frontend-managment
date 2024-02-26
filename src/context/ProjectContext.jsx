@@ -8,7 +8,7 @@ const ProjectContextProvider = ({children}) => {
     const [projects, setProjects] = useState([])
     
     const getProjects = () => {
-        fetch(`${BASE_URL}/getProjects`)
+        fetch(`${BASE_URL}/api/projects/getProjects`)
         .then(res => res.json())
         .then(result => setProjects(result))
         .catch(e => console.log(e))

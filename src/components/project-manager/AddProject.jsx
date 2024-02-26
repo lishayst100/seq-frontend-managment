@@ -15,9 +15,9 @@ const AddProject = () => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [credits, setCredits] = useState("");
-  const [linkId, setLinkId] = useState("");
+  /* const [linkId, setLinkId] = useState(""); */
   const [checkGenres, setCheckGenres] = useState([]);
-  const {getProjects} = useContext(ProjectContext)
+  const {getProjects,projects} = useContext(ProjectContext)
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
 
@@ -43,11 +43,11 @@ const AddProject = () => {
     formData.append("title", title);
     formData.append("link", link);
     formData.append("credits", credits);
-    formData.append("linkId", linkId);
+    formData.append("linkId", projects.length.toString());
 
     try {
       const response = await fetch(
-        `${BASE_URL}/addProject`,
+        `${BASE_URL}/api/projects/addProject`,
         {
           method: "POST",
           body: formData,
@@ -101,7 +101,7 @@ const AddProject = () => {
         {isLoading && <ColorRing width={'100%'}/>}
         <Input label={"Title"} setState={setTitle} value={title} />
         <Input label={"Link"} setState={setLink} value={link} />
-        <Input label={"Link ID"} setState={setLinkId} value={linkId} />
+       {/*  <Input label={"Link ID"} setState={setLinkId} value={linkId} /> */}
         <TextArea setState={setCredits} value={credits} label={'Credits'} />
         <CheckBox checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
         <UploadImage setImages={setImages} images={images}/>

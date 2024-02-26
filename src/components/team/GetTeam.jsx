@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL_TEAM } from '../../services/utils'
+import { BASE_URL} from '../../services/utils'
 import { useNavigate } from 'react-router-dom'
 import DeleteBtn from './DeleteBtn'
 
@@ -8,7 +8,7 @@ const GetTeam = () => {
     const nav = useNavigate()
 
     useEffect(()=>{
-        fetch(`${BASE_URL_TEAM}`)
+        fetch(`${BASE_URL}/api/team`)
         .then(res=> res.json())
         .then(result => setTeam(result))
     },[])

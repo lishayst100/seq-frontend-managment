@@ -26,7 +26,7 @@ const EditProject = () => {
   const nav = useNavigate();
   
 const getProject = () => {
-  fetch(`${BASE_URL}/getOneProject/${id}`)
+  fetch(`${BASE_URL}/api/projects/getOneProject/${id}`)
   .then(res => res.json())
   .then(result => {
     setTitle(result.title)
@@ -104,7 +104,7 @@ const handleRemovePreviewImage = (index) => {
     
 
     try {
-      const response = await fetch(`${BASE_URL}/myUpdateProject/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/projects/myUpdateProject/${id}`, {
         method: 'PUT',
         body: formData,
        

@@ -9,7 +9,7 @@ const DeleteProjectBtn = ({id}) => {
     const nav = useNavigate()
     const handleDelete = async() => {
       try {
-        const response = await fetch(`${BASE_URL}/deleteProject/${id}`,{
+        const response = await fetch(`${BASE_URL}/api/projects/deleteProject/${id}`,{
           method:'DELETE'
       })
       const data = await response.json()

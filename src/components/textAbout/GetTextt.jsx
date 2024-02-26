@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  BASE_URL_TEXT } from '../../services/utils'
+import {  BASE_URL } from '../../services/utils'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ const GetText = () => {
     },[])
 
     const getText = () => {
-        fetch(`${BASE_URL_TEXT}`)
+        fetch(`${BASE_URL}/api/text`)
         .then(res => res.json())
         .then(result => setTexts(result))
         .catch(err => console.log(err))
@@ -20,7 +20,7 @@ const GetText = () => {
 
 
     const handleDelete =(id) => {
-        fetch(`${BASE_URL_TEXT}/deleteText/${id}`,{
+        fetch(`${BASE_URL}/api/text/deleteText/${id}`,{
             method: 'DELETE'
         }).then(res => res.json())
         .then()

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL_TEXT } from '../../services/utils'
+import { BASE_URL} from '../../services/utils'
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const EditText = () => {
   const [newText, setNewText] = useState('')
 
     useEffect(()=> {
-        fetch(`${BASE_URL_TEXT}/${id}`)
+        fetch(`${BASE_URL}/api/text/${id}`)
         .then(res => res.json())
         .then(result => setNewText(result.text))
         .catch( err => console.log(err))
@@ -18,7 +18,7 @@ const EditText = () => {
 
   const hanleAddText = () => {
     const text = {text: newText}
-    fetch(`${BASE_URL_TEXT}/updateText/${id}`, {
+    fetch(`${BASE_URL}/api/text/updateText/${id}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(text)

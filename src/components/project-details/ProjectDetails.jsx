@@ -13,7 +13,7 @@ const ProjectDetails = () => {
     const vimeoId = parseInt(project.linkId)
 
      useEffect(()=>{
-        fetch(`${BASE_URL}/getOneProject/${id}`)
+        fetch(`${BASE_URL}/api/projects/getOneProject/${id}`)
         .then(res =>res.json())
         .then(result => {
              setProject(result)

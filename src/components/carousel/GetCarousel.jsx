@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BASE_URL_CAROUSEL } from "../../services/utils";
+import { BASE_URL } from "../../services/utils";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
@@ -8,7 +8,7 @@ const GetCarousel = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    fetch(`${BASE_URL_CAROUSEL}/`)
+    fetch(`${BASE_URL}/api/carousel`)
       .then((res) => res.json())
       .then((result) => setCarousel(result));
   }, []);

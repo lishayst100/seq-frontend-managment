@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import { ProjectContext } from "../../context/ProjectContext";
 import {ColorRing} from 'react-loader-spinner'
-import { BASE_URL, BASE_URL_TEAM } from "../../services/utils";
+import { BASE_URL } from "../../services/utils";
 import Input from "../project-manager/Input";
 import TextArea from "../project-manager/TextArea";
 import UploadImage from "../project-manager/UploadImage";
@@ -44,7 +44,7 @@ const AddTeam = () => {
 
     try {
       const response = await fetch(
-        `${BASE_URL_TEAM}/addTeam`,
+        `${BASE_URL}/api/team/addTeam`,
         {
           method: "POST",
           body: formData,

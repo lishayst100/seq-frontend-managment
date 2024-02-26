@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BASE_URL_TEXT } from '../../services/utils'
+import { BASE_URL } from '../../services/utils'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const AddText = () => {
   const [newText, setNewText] = useState('')
   const hanleAddText = () => {
     const text = {text: newText}
-    fetch(`${BASE_URL_TEXT}/addText`, {
+    fetch(`${BASE_URL}/api/text/addText`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(text)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImagesPreview from "../project-details/ImagesPreview";
 import UrlImages from "../project-manager/UrlImages";
 import { useNavigate, useParams } from "react-router-dom";
-import { BASE_URL_CAROUSEL } from "../../services/utils";
+import { BASE_URL } from "../../services/utils";
 import Swal from "sweetalert2";
 
 const UpdateCarousel = () => {
@@ -14,7 +14,7 @@ const UpdateCarousel = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    fetch(`${BASE_URL_CAROUSEL}/findCarousel/${id}`)
+    fetch(`${BASE_URL}/api/carousel/findCarousel/${id}`)
       .then((res) => res.json())
       .then((result) => {
         setUrlImages(result.url);
@@ -35,7 +35,7 @@ const UpdateCarousel = () => {
     }
 
     try {
-      const response = await fetch(`${BASE_URL_CAROUSEL}/updateImages/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/carousel/updateImages/${id}`, {
         method: "PUT",
         body: formData,
       });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BASE_URL_TEAM } from '../../services/utils';
+import { BASE_URL } from '../../services/utils';
 import Swal from 'sweetalert2';
 import { ColorRing } from 'react-loader-spinner';
 import Input from '../project-manager/Input';
@@ -21,7 +21,7 @@ const EditTeam = () => {
   const nav = useNavigate();
   
 const getTeam = () => {
-  fetch(`${BASE_URL_TEAM}/${id}`)
+  fetch(`${BASE_URL}/api/team/${id}`)
   .then(res => res.json())
   .then(result => {
     setTitle(result.title)
@@ -95,7 +95,7 @@ const handleRemovePreviewImage = (index) => {
     
 
     try {
-      const response = await fetch(`${BASE_URL_TEAM}/updateTeam/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/team/updateTeam/${id}`, {
         method: 'PUT',
         body: formData,
        

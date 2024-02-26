@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import UploadImage from '../project-manager/UploadImage'
-import {  BASE_URL_CAROUSEL } from '../../services/utils';
+import {  BASE_URL } from '../../services/utils';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
@@ -21,7 +21,7 @@ const AddCarouselImage = () => {
     
         try {
           const response = await fetch(
-            `${BASE_URL_CAROUSEL}/addCarouselImage`,
+            `${BASE_URL}/api/carousel/addCarouselImage`,
             {
               method: "POST",
               body: formData,

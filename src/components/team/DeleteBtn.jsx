@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2'
-import { BASE_URL, BASE_URL_TEAM } from '../../services/utils';
+import { BASE_URL } from '../../services/utils';
 import { useNavigate } from 'react-router-dom';
 import { ProjectContext } from '../../context/ProjectContext';
 const DeleteBtn = ({id,setTeam}) => {
@@ -9,7 +9,7 @@ const DeleteBtn = ({id,setTeam}) => {
     const nav = useNavigate()
     const handleDelete = async() => {
       try {
-        const response = await fetch(`${BASE_URL_TEAM}/deleteTeam/${id}`,{
+        const response = await fetch(`${BASE_URL}/api/team/deleteTeam/${id}`,{
           method:'DELETE'
       })
       const data = await response.json()
@@ -21,7 +21,7 @@ const DeleteBtn = ({id,setTeam}) => {
 
 
     const getTeam = () => {
-        fetch(`${BASE_URL_TEAM}`)
+        fetch(`${BASE_URL}/api/team`)
         .then(res=> res.json())
         .then(result => setTeam(result))
     }
