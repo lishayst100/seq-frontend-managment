@@ -75,7 +75,7 @@ const ArrangeItemsComponent = () => {
           <Droppable droppableId="arrangeItems">
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps} className=' d-flex flex-column gap-3'>
-                {items.map((item, index) => (
+                {items.sort((a,b)=> a.linkId - b.linkId).map((item, index) => (
                   <Draggable key={item._id} draggableId={item._id} index={index}>
                     {(provided) => (
                       <div
