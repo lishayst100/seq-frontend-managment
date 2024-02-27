@@ -86,7 +86,7 @@ const ArrangeItemsComponent = () => {
                       >
                           
                     <div className=' d-flex gap-2'>
-                    <img className='rounded' src={item.images[0]} alt="" width={90} height={90} onClick={()=>{nav(`project/${item._id}`)}}/>
+                    <img className='rounded' src={item.frontImage} alt="" width={90} height={90} onClick={()=>{nav(`project/${item._id}`)}}/>
                    <span style={{fontWeight: 600}}>{item.title}</span>
                     </div>
                     

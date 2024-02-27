@@ -19,9 +19,11 @@ const EditProject = () => {
   const [credits, setCredits] = useState('');
   const [link, setLink] = useState('');
   const [linkId, setLinkId] = useState('');
+  const [frontImage, setFrontImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [checkGenres, setCheckGenres] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
+
   const {getProjects} = useContext(ProjectContext)
   const nav = useNavigate();
   
@@ -35,6 +37,7 @@ const getProject = () => {
     setLink(result.link)
     setLinkId(result.linkId)
     setCheckGenres(result.genres)
+    setFrontImage(result.frontImage ?? result.images[0]) 
   }).catch(err => console.log(err.message))
 }
 
@@ -101,6 +104,7 @@ const handleRemovePreviewImage = (index) => {
     formData.append('credits', credits);
     formData.append('link', link);
     formData.append('linkId', linkId);
+    formData.append('frontImage', frontImage);
     
 
     try {
@@ -156,9 +160,14 @@ const handleRemovePreviewImage = (index) => {
         <CheckBoxEdit checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
       </form>
-        <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
+      <div>
+          <h3>Front Image</h3>
+          <img src={frontImage} alt="..." style={{maxWidth: 400 ,height: 300}} />
+        </div>
 
-      
+        <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages} setFrontImage={setFrontImage}/>
+
+        
     </div>
   );
 };
