@@ -3,7 +3,7 @@ import React from 'react'
 const CheckBoxEdit = ({checkGenres, setCheckGenres}) => {
     
 
-    const checkboxArray = ['production', 'commercial','motion']
+    const checkboxArray = ['production', 'commercial','motion','events']
     const handleIsChecked = (e) => {
         const {checked,value} = e.target
         if(checked){

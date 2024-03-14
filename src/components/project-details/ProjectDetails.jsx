@@ -9,7 +9,7 @@ const ProjectDetails = () => {
     const {id} = useParams()
     const [project,setProject] = useState({})
     const [loading,setLoading] = useState(true)
-    const {title,credits,linkId,link,images} = project
+    const {title,credits,images} = project
     const vimeoId = parseInt(project.linkId)
 
      useEffect(()=>{
