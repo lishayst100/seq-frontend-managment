@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BASE_URL } from "../../services/utils";
+import { BASE_URL, convertBaseImg, convertSrcImg } from "../../services/utils";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
@@ -21,11 +21,16 @@ const GetCarousel = () => {
 
       
         
-        images.url.map((image) => (
+        images.url.map((image) => {
+          const base_img = convertBaseImg(image)
+          const src_img = convertSrcImg(image)
+          return (
             <Carousel.Item key={image}>
-            <img src={image} alt='...' style={{height: 600, width: '100%',objectFit:'cover'}}/>
+            <img src={`${base_img}tr:f-auto/${src_img}`} alt='...' style={{height: 600, width: '100%',objectFit:'cover'}}/>
             </Carousel.Item>
-        ))
+          )
+            
+})
        
         )
       )}

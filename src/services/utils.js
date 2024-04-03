@@ -12,8 +12,19 @@ export function convertToBase64(file){
   }
 
 
-export const BASE_URL = 'https://server-seq.onrender.com' 
-//export const BASE_URL = 'http://localhost:3001' 
+  export const convertBaseImg = (img) => {
+    return img.split("").slice(0, 33).join("");
+  }
+
+  export const convertSrcImg = (img) => {
+    return img.split("").slice(33, img.length).join("");
+  }
+
+
+//export const BASE_URL = 'https://server-seq.onrender.com' 
+
+
+export const BASE_URL = 'http://localhost:3001' 
 
 /* export const BASE_URL = 'https://server-seq.onrender.com' 
 export const BASE_URL_CAROUSEL = 'https://server-seq.onrender.com/api/carousel' 

@@ -12,14 +12,15 @@ const ArrangeItemsComponent = () => {
    
     const [items, setItems] = useState([]);
     const nav = useNavigate()
+    const getProjects = () => {
+      fetch(`${BASE_URL}/api/projects/getProjects`)
+      .then(res => res.json())
+      .then(result => setItems(result))
+      .catch(e => console.log(e))
+  }
 
     useEffect(()=>{
-      const getProjects = () => {
-        fetch(`${BASE_URL}/api/projects/getProjects`)
-        .then(res => res.json())
-        .then(result => setItems(result))
-        .catch(e => console.log(e))
-    }
+      
     getProjects()
     },[])
 
@@ -92,7 +93,7 @@ const ArrangeItemsComponent = () => {
                     
                    <div className='d-flex gap-3 align-items-center justify-self-end'>
                     <EditBtn id={item._id}/>
-                    <DeleteProjectBtn id={item._id}/>
+                    <DeleteProjectBtn id={item._id} getProjects={getProjects}/>
                    </div>
                    
                 </div>

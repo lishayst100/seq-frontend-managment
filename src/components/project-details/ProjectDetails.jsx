@@ -9,7 +9,7 @@ const ProjectDetails = () => {
     const {id} = useParams()
     const [project,setProject] = useState({})
     const [loading,setLoading] = useState(true)
-    const {title,credits,images} = project
+    const {title,credits,images,link} = project
     const vimeoId = parseInt(project.linkId)
 
      useEffect(()=>{
@@ -31,6 +31,8 @@ const ProjectDetails = () => {
               <img src={img} alt="..." key={img} width={250} height={250} />
             ))}
           </div>
+
+          <video src={link} controls></video>
         </div>
         {loading && <p>Loading...</p>}
     </div>

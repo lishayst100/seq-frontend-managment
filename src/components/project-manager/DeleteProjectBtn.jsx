@@ -3,17 +3,16 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2'
 import { BASE_URL } from '../../services/utils';
 import { useNavigate } from 'react-router-dom';
-import { ProjectContext } from '../../context/ProjectContext';
-const DeleteProjectBtn = ({id}) => {
-  const {getProjects} = useContext(ProjectContext)
-    const nav = useNavigate()
+
+const DeleteProjectBtn = ({id, getProjects}) => {
+  
+
     const handleDelete = async() => {
       try {
         const response = await fetch(`${BASE_URL}/api/projects/deleteProject/${id}`,{
           method:'DELETE'
       })
       const data = await response.json()
-      nav('/')
       getProjects()
       } catch (error) {
         console.log(error)

@@ -10,6 +10,8 @@ import { ColorRing } from 'react-loader-spinner';
 import ImagesPreview from './ImagesPreview';
 import CheckBox from '../project-manager/CheckBox';
 import CheckBoxEdit from '../project-manager/CheckBoxEdit';
+import FrontImage from './FrontImage';
+import UploadVideo from '../project-manager/UploadVideo';
 
 const EditProject = () => {
   const {id} = useParams()
@@ -18,6 +20,7 @@ const EditProject = () => {
   const [title, setTitle] = useState('');
   const [credits, setCredits] = useState('');
   const [link, setLink] = useState('');
+  const [video, setVideo] = useState(null);
   const [linkId, setLinkId] = useState('');
   const [frontImage, setFrontImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +44,13 @@ const getProject = () => {
   }).catch(err => console.log(err.message))
 }
 
+
+
+const handleVideoChange = (event) => {
+  const video = event.target.files[0]
+  setVideo(video)
+  console.log(event.target.files[0])
+}
 
 const handleRemoveImage = (index) => {
   
@@ -105,6 +115,9 @@ const handleRemovePreviewImage = (index) => {
     formData.append('link', link);
     formData.append('linkId', linkId);
     formData.append('frontImage', frontImage);
+    if (video) {
+      formData.append("video", video);
+    }
     
 
     try {
@@ -154,18 +167,15 @@ const handleRemovePreviewImage = (index) => {
         </button>
         {isLoading && <ColorRing width={'100%'}/>}
         <Input label={"Title"} setState={setTitle} value={title} />
-        <Input label={"Link"} setState={setLink} value={link} />
-        <Input label={"Link ID"} setState={setLinkId} value={linkId} />
         <TextArea setState={setCredits} value={credits} label={'Credits'}/>
         <CheckBoxEdit checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
+        <UploadVideo setVideo={setVideo}/>
       </form>
-      <div>
-          <h3>Front Image</h3>
-          <img src={frontImage} alt="..." style={{maxWidth: 400 ,height: 300}} />
-        </div>
+      <FrontImage frontImage={frontImage}/>
 
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages} setFrontImage={setFrontImage}/>
+        <video src={link} controls></video>
 
         
     </div>

@@ -3,6 +3,7 @@ import React from 'react'
 const ImagesPreview = ({handleFileChange,previewImages,handleRemovePreviewImage}) => {
   return (
     <div>
+      <label htmlFor="" className='font-bolder text-start'>Upload Images</label>
           <input
         className='form-control'
         type="file"
