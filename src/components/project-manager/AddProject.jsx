@@ -1,19 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import UploadImage from "./UploadImage";
-import UploadVideo from "./UploadVideo"; // Import the UploadVideo component
+import UploadVideo from "./UploadVideo";
+import UploadMultipleVideos from "./UploadMultipleVideos"; // Import the new component
 import { ProjectContext } from "../../context/ProjectContext";
 import { ColorRing } from 'react-loader-spinner';
 import { BASE_URL } from "../../services/utils";
 import CheckBox from "./CheckBox";
 
-
 const AddProject = () => {
   const [images, setImages] = useState([]);
-  const [video, setVideo] = useState(null); // State for the uploaded video
+  const [video, setVideo] = useState(null); // State for the main uploaded video
+  const [supplementaryVideos, setSupplementaryVideos] = useState([]); // State for multiple supplementary videos
   const [title, setTitle] = useState("");
   const [credits, setCredits] = useState("");
   const [checkGenres, setCheckGenres] = useState([]);
@@ -30,8 +31,11 @@ const AddProject = () => {
       formData.append("images", image);
     });
     if (video) {
-      formData.append("video", video); // Append video file to form data
+      formData.append("video", video); // Append main video file to form data
     }
+    supplementaryVideos.forEach((supplementaryVideo) => {
+      formData.append("supplementaryVideos", supplementaryVideo); // Append supplementary video files to form data
+    });
     checkGenres.forEach((genre) => {
       formData.append("genres", genre);
     });
@@ -39,7 +43,7 @@ const AddProject = () => {
     formData.append("credits", credits);
     formData.append("linkId", projects.length.toString());
 
-    console.log(formData)
+    console.log(formData);
 
     try {
       const response = await fetch(
@@ -52,7 +56,7 @@ const AddProject = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Images uploaded:", data.newProject);
+        console.log("Project created:", data.newProject);
         Swal.fire({
           title: "Good job!",
           text: data.message,
@@ -60,20 +64,19 @@ const AddProject = () => {
         });
         setIsLoading(false);
         nav("/");
-        getProjects()
-
+        getProjects();
       } else {
-        setIsLoading(false)
+        setIsLoading(false);
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
           footer: 'Please contact the developer'
         });
-        console.error("Failed to upload images");
+        console.error("Failed to create project");
       }
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -98,8 +101,8 @@ const AddProject = () => {
         <TextArea setState={setCredits} value={credits} label={'Credits'} />
         <CheckBox checkGenres={checkGenres} setCheckGenres={setCheckGenres} />
         <UploadImage setImages={setImages} images={images} />
-        {/* Add the UploadVideo component */}
-        <UploadVideo setVideo={setVideo}/>
+        <UploadVideo setVideo={setVideo} label="Main Video" /> {/* Main video upload */}
+        <UploadMultipleVideos setVideos={setSupplementaryVideos} /> {/* Supplementary videos upload */}
       </form>
     </div>
   );

@@ -22,8 +22,6 @@ export function convertToBase64(file){
 
 
 export const BASE_URL = 'https://server-seq.onrender.com' 
-
-
 //export const BASE_URL = 'http://localhost:3001' 
 
 /* export const BASE_URL = 'https://server-seq.onrender.com' 

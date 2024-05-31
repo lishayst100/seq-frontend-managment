@@ -12,6 +12,8 @@ import CheckBox from '../project-manager/CheckBox';
 import CheckBoxEdit from '../project-manager/CheckBoxEdit';
 import FrontImage from './FrontImage';
 import UploadVideo from '../project-manager/UploadVideo';
+import UrlVideos from '../project-manager/UrlVideos';
+import UploadMultipleVideos from '../project-manager/UploadMultipleVideos';
 
 const EditProject = () => {
   const {id} = useParams()
@@ -26,7 +28,8 @@ const EditProject = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [checkGenres, setCheckGenres] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-
+  const [supplementaryVideos, setSupplementaryVideos] = useState([]); 
+  const [urlVideos, seturlVideos] = useState([]); 
   const {getProjects} = useContext(ProjectContext)
   const nav = useNavigate();
   
@@ -41,21 +44,20 @@ const getProject = () => {
     setLinkId(result.linkId)
     setCheckGenres(result.genres)
     setFrontImage(result.frontImage ?? result.images[0]) 
+    seturlVideos(result.supplementaryVideos)
   }).catch(err => console.log(err.message))
 }
 
-
-
-const handleVideoChange = (event) => {
-  const video = event.target.files[0]
-  setVideo(video)
-  console.log(event.target.files[0])
-}
 
 const handleRemoveImage = (index) => {
   
     const updatedImages = urlImages.filter((_, i) => i !== index);
     setUrlImages(updatedImages);
+}
+const handleRemoveVideo = (index) => {
+  
+    const updatedVideos = urlVideos.filter((_, i) => i !== index);
+    seturlVideos(updatedVideos);
 }
 
 
@@ -118,6 +120,18 @@ const handleRemovePreviewImage = (index) => {
     if (video) {
       formData.append("video", video);
     }
+
+    if(supplementaryVideos.length > 0){
+      for (let i = 0; i < supplementaryVideos.length; i++) {
+        formData.append('supplementaryVideos', supplementaryVideos[i]);
+      }
+    }
+    if(urlVideos.length > 0){
+      for (let i = 0; i < urlVideos.length; i++) {
+        formData.append('urlVideos', urlVideos[i]);
+      }
+    }
+
     
 
     try {
@@ -171,13 +185,14 @@ const handleRemovePreviewImage = (index) => {
         <CheckBoxEdit checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
         <UploadVideo setVideo={setVideo}/>
+        <UploadMultipleVideos setVideos={setSupplementaryVideos}/>
       </form>
       <FrontImage frontImage={frontImage}/>
 
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages} setFrontImage={setFrontImage}/>
-        <video src={link} controls></video>
-
         
+        <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos}/>
+        <video src={link} controls></video>
     </div>
   );
 };
