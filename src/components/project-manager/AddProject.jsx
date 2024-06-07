@@ -10,6 +10,7 @@ import { ProjectContext } from "../../context/ProjectContext";
 import { ColorRing } from 'react-loader-spinner';
 import { BASE_URL } from "../../services/utils";
 import CheckBox from "./CheckBox";
+import UploadFrontImage from "./UploadFrontImage";
 
 const AddProject = () => {
   const [images, setImages] = useState([]);
@@ -18,6 +19,7 @@ const AddProject = () => {
   const [title, setTitle] = useState("");
   const [credits, setCredits] = useState("");
   const [checkGenres, setCheckGenres] = useState([]);
+  const [frontImage, setFrontImage] = useState([]);
   const { getProjects, projects } = useContext(ProjectContext);
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
@@ -39,6 +41,7 @@ const AddProject = () => {
     checkGenres.forEach((genre) => {
       formData.append("genres", genre);
     });
+    formData.append("frontImage", frontImage);
     formData.append("title", title);
     formData.append("credits", credits);
     formData.append("linkId", projects.length.toString());
@@ -100,6 +103,7 @@ const AddProject = () => {
         <Input label={"Title"} setState={setTitle} value={title} />
         <TextArea setState={setCredits} value={credits} label={'Credits'} />
         <CheckBox checkGenres={checkGenres} setCheckGenres={setCheckGenres} />
+        <UploadFrontImage setImage={setFrontImage}/>
         <UploadImage setImages={setImages} images={images} />
         <UploadVideo setVideo={setVideo} label="Main Video" /> {/* Main video upload */}
         <UploadMultipleVideos setVideos={setSupplementaryVideos} /> {/* Supplementary videos upload */}

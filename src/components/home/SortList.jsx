@@ -87,11 +87,13 @@ const ArrangeItemsComponent = () => {
                       >
                           
                     <div className=' d-flex gap-2'>
+                    <span>{index + 1}.</span>
                     <img className='rounded' src={item.frontImage} alt="" width={90} height={90} onClick={()=>{nav(`project/${item._id}`)}}/>
                    <span style={{fontWeight: 600}}>{item.title}</span>
                     </div>
                     
                    <div className='d-flex gap-3 align-items-center justify-self-end'>
+                    
                     <EditBtn id={item._id}/>
                     <DeleteProjectBtn id={item._id} getProjects={getProjects}/>
                    </div>
