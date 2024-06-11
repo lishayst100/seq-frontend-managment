@@ -14,6 +14,7 @@ import FrontImage from './FrontImage';
 import UploadVideo from '../project-manager/UploadVideo';
 import UrlVideos from '../project-manager/UrlVideos';
 import UploadMultipleVideos from '../project-manager/UploadMultipleVideos';
+import UploadFrontImage from '../project-manager/UploadFrontImage';
 
 const EditProject = () => {
   const {id} = useParams()
@@ -25,6 +26,7 @@ const EditProject = () => {
   const [video, setVideo] = useState(null);
   const [linkId, setLinkId] = useState('');
   const [frontImage, setFrontImage] = useState('');
+  const [frontImageFile, setFrontImageFile] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [checkGenres, setCheckGenres] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
@@ -120,6 +122,9 @@ const handleRemovePreviewImage = (index) => {
     if (video) {
       formData.append("video", video);
     }
+    if (frontImageFile !== '') {
+      formData.append("frontImage", frontImageFile);
+    }
 
     if(supplementaryVideos.length > 0){
       for (let i = 0; i < supplementaryVideos.length; i++) {
@@ -183,13 +188,15 @@ const handleRemovePreviewImage = (index) => {
         <Input label={"Title"} setState={setTitle} value={title} />
         <TextArea setState={setCredits} value={credits} label={'Credits'}/>
         <CheckBoxEdit checkGenres={checkGenres} setCheckGenres={setCheckGenres}/>
+        <UploadFrontImage setImage={setFrontImageFile}/>
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
         <UploadVideo setVideo={setVideo}/>
         <UploadMultipleVideos setVideos={setSupplementaryVideos}/>
+
       </form>
       <FrontImage frontImage={frontImage}/>
 
-        <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages} setFrontImage={setFrontImage}/>
+        <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
         
         <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos}/>
         <video src={link} controls></video>

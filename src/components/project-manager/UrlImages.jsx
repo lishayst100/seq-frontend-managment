@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UrlImages = ({urlImages,handleRemoveImage, setFrontImage}) => {
+const UrlImages = ({urlImages,handleRemoveImage}) => {
   return (
     <div >
         <h4>Current Images</h4>
@@ -11,7 +11,7 @@ const UrlImages = ({urlImages,handleRemoveImage, setFrontImage}) => {
           <div className='d-flex flex-column justify-content-center align-items-center' key={index}>
               <input type="button" value="Remove" className='btn btn-danger' onClick={()=>{handleRemoveImage(index)}} />
               <div style={{maxWidth: 400 ,height: 300}}>
-              <img src={image} alt={`Preview ${index}`} onClick={(e)=> {setFrontImage(e.target.src)}} style={{  marginRight: '10px', maxWidth: '100%', objectFit: 'cover' }} />
+              <img src={image} alt={`Preview ${index}`}  style={{  marginRight: '10px', maxWidth: '100%', objectFit: 'cover' }} />
               </div>
               
           </div>
