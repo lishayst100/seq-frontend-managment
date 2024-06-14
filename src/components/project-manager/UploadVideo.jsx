@@ -13,7 +13,7 @@ const UploadVideo = ({setVideo}) => {
 
   return (
     <div>
-      <label htmlFor="videoInput" className="form-label">Upload Video</label>
+      <label htmlFor="videoInput" className="form-label label-title">Upload Video</label>
       <input
         type="file"
         id="videoInput"

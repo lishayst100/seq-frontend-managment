@@ -20,7 +20,7 @@ const UploadMultipleVideos = ({ setVideos }) => {
 
   return (
     <div>
-      <label htmlFor="videosInput" className="form-label">Upload More Videos</label>
+      <label htmlFor="videosInput" className="form-label label-title">Upload More Videos</label>
       <input
         type="file"
         id="videosInput"

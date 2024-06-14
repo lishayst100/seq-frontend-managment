@@ -71,6 +71,7 @@ const ArrangeItemsComponent = () => {
 
   return (
     <div className='container'>
+      <button onClick={saveOrder} className='btn btn-success my-3 gap-2 '>Save Order</button>
       <div className=' '>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="arrangeItems">
@@ -88,7 +89,7 @@ const ArrangeItemsComponent = () => {
                           
                     <div className=' d-flex gap-2'>
                     <span>{index + 1}.</span>
-                    <img className='rounded' src={item.frontImage} alt="" width={90} height={90} onClick={()=>{nav(`project/${item._id}`)}}/>
+                    <img className='rounded' src={item.frontImage} alt="" width={90} height={90} onClick={()=>{nav(`/edit-project/${item._id}`)}}/>
                    <span style={{fontWeight: 600}}>{item.title}</span>
                     </div>
                     
@@ -109,7 +110,7 @@ const ArrangeItemsComponent = () => {
           </Droppable>
         </DragDropContext>
       </div>
-      <button onClick={saveOrder} className='btn btn-primary mt-3'>Save Order</button>
+      
     </div>
   );
 };

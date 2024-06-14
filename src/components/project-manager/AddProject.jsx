@@ -11,6 +11,7 @@ import { ColorRing } from 'react-loader-spinner';
 import { BASE_URL } from "../../services/utils";
 import CheckBox from "./CheckBox";
 import UploadFrontImage from "./UploadFrontImage";
+import './../home/Home.scss'
 
 const AddProject = () => {
   const [images, setImages] = useState([]);

@@ -33,8 +33,8 @@ const UploadImage = ({ setImages, images }) => {
   }, [images]);
 
   return (
-    <div className='d-flex flex-column align-items-start'>
-      <label>Upload Images:</label>
+    <div className='d-flex flex-column'>
+      <div className='text-center label-title '>Upload Images:</div>
       <input
         className='form-control'
         type="file"

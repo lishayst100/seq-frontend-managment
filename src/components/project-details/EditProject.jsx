@@ -199,7 +199,10 @@ const handleRemovePreviewImage = (index) => {
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
         
         <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos}/>
-        <video src={link} controls></video>
+        <div className='container'>
+        <video src={link} controls className='w-75'></video>
+        </div>
+        
     </div>
   );
 };

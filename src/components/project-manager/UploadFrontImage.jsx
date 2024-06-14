@@ -12,7 +12,7 @@ const UploadFrontImage = ({ setImage }) => {
 
   return (
     <div>
-      <label htmlFor="imageInput" className="form-label">Upload Master Image</label>
+      <label htmlFor="imageInput" className="form-label label-title">Upload Master Image</label>
       <input
         type="file"
         id="imageInput"
