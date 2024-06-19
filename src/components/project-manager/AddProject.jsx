@@ -21,6 +21,7 @@ const AddProject = () => {
   const [credits, setCredits] = useState("");
   const [checkGenres, setCheckGenres] = useState([]);
   const [frontImage, setFrontImage] = useState([]);
+  const [frontImages, setFrontImages] = useState([]);
   const { getProjects, projects } = useContext(ProjectContext);
   const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
@@ -33,6 +34,12 @@ const AddProject = () => {
     images.forEach((image) => {
       formData.append("images", image);
     });
+    if(frontImages){
+      frontImages.forEach((image) => {
+        formData.append("frontImages", image);
+      });
+    }
+    
     if (video) {
       formData.append("video", video); // Append main video file to form data
     }
@@ -108,6 +115,7 @@ const AddProject = () => {
         <UploadImage setImages={setImages} images={images} />
         <UploadVideo setVideo={setVideo} label="Main Video" /> {/* Main video upload */}
         <UploadMultipleVideos setVideos={setSupplementaryVideos} /> {/* Supplementary videos upload */}
+        {supplementaryVideos.length > 0 && <UploadImage setImages={setFrontImages} images={frontImages} />}
       </form>
     </div>
   );
