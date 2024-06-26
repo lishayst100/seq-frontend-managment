@@ -1,7 +1,7 @@
 import React from "react";
 
 const CheckBox = ({ checkGenres, setCheckGenres }) => {
-  const genres = ["Commercial", "Production", "Motion", "Events"];
+  const genres = ["UX", "Commercial", "Motion", "Events"];
   const handleIsChecked = (e) => {
     const { checked, value } = e.target;
     if (checked) {

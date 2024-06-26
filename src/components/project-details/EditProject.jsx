@@ -31,6 +31,7 @@ const EditProject = () => {
   const [checkGenres, setCheckGenres] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [supplementaryVideos, setSupplementaryVideos] = useState([]); 
+  const [frontImagesVideosUrl, setFrontImagesVideosUrl] = useState([]); 
   const [urlVideos, seturlVideos] = useState([]); 
   const {getProjects} = useContext(ProjectContext)
   const nav = useNavigate();
@@ -47,6 +48,7 @@ const getProject = () => {
     setCheckGenres(result.genres)
     setFrontImage(result.frontImage ?? result.images[0]) 
     seturlVideos(result.supplementaryVideos)
+    setFrontImagesVideosUrl(result.frontImages)
   }).catch(err => console.log(err.message))
 }
 
@@ -60,6 +62,12 @@ const handleRemoveVideo = (index) => {
   
     const updatedVideos = urlVideos.filter((_, i) => i !== index);
     seturlVideos(updatedVideos);
+}
+
+
+const handleRemoveFrontImageVideo = (index) => {
+  const updatedFiles = frontImagesVideosUrl.filter((_, i) => i !== index);
+  setFrontImagesVideosUrl(updatedFiles);
 }
 
 
@@ -192,13 +200,16 @@ const handleRemovePreviewImage = (index) => {
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
         <UploadVideo setVideo={setVideo}/>
         <UploadMultipleVideos setVideos={setSupplementaryVideos}/>
+        
 
       </form>
       <FrontImage frontImage={frontImage}/>
 
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
         
+        
         <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos}/>
+       <UrlImages urlImages={frontImagesVideosUrl} handleRemoveImage={handleRemoveFrontImageVideo}/>
         <div className='container'>
         <video src={link} controls className='w-75'></video>
         </div>
