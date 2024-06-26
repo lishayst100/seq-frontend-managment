@@ -15,6 +15,7 @@ import UploadVideo from '../project-manager/UploadVideo';
 import UrlVideos from '../project-manager/UrlVideos';
 import UploadMultipleVideos from '../project-manager/UploadMultipleVideos';
 import UploadFrontImage from '../project-manager/UploadFrontImage';
+import UploadImage from '../project-manager/UploadImage';
 
 const EditProject = () => {
   const {id} = useParams()
@@ -32,7 +33,9 @@ const EditProject = () => {
   const [previewImages, setPreviewImages] = useState([]);
   const [supplementaryVideos, setSupplementaryVideos] = useState([]); 
   const [frontImagesVideosUrl, setFrontImagesVideosUrl] = useState([]); 
+  const [frontImagesVideos, setFrontImagesVideos] = useState([]); 
   const [urlVideos, seturlVideos] = useState([]); 
+  const [isLooping, setIsLooping] = useState(false);
   const {getProjects} = useContext(ProjectContext)
   const nav = useNavigate();
   
@@ -49,6 +52,7 @@ const getProject = () => {
     setFrontImage(result.frontImage ?? result.images[0]) 
     seturlVideos(result.supplementaryVideos)
     setFrontImagesVideosUrl(result.frontImages)
+    setIsLooping(result.isLooping)
   }).catch(err => console.log(err.message))
 }
 
@@ -119,6 +123,9 @@ const handleRemovePreviewImage = (index) => {
     for (let i = 0; i < urlImages.length; i++) {
       formData.append('urlImages', urlImages[i]);
     }
+    for (let i = 0; i < frontImagesVideosUrl.length; i++) {
+      formData.append('frontImagesVideosUrl', frontImagesVideosUrl[i]);
+    }
     checkGenres.forEach((genre) => {
       formData.append("genres", genre);
     })
@@ -127,6 +134,7 @@ const handleRemovePreviewImage = (index) => {
     formData.append('link', link);
     formData.append('linkId', linkId);
     formData.append('frontImage', frontImage);
+    formData.append("isLooping", isLooping);
     if (video) {
       formData.append("video", video);
     }
@@ -142,6 +150,11 @@ const handleRemovePreviewImage = (index) => {
     if(urlVideos.length > 0){
       for (let i = 0; i < urlVideos.length; i++) {
         formData.append('urlVideos', urlVideos[i]);
+      }
+    }
+    if(frontImagesVideos.length > 0){
+      for (let i = 0; i < frontImagesVideos.length; i++) {
+        formData.append('frontImages', frontImagesVideos[i]);
       }
     }
 
@@ -200,6 +213,18 @@ const handleRemovePreviewImage = (index) => {
         <ImagesPreview handleFileChange={handleFileChange} previewImages={previewImages} handleRemovePreviewImage={handleRemovePreviewImage}/>
         <UploadVideo setVideo={setVideo}/>
         <UploadMultipleVideos setVideos={setSupplementaryVideos}/>
+        
+        {supplementaryVideos.length > 0 && <UploadImage images={frontImagesVideos} setImages={setFrontImagesVideos}/>}
+        <div className="form-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={isLooping}
+              onChange={(e) => setIsLooping(e.target.checked)}
+            />
+            Loop Video
+          </label>
+        </div>
         
 
       </form>
