@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ProjectsList from './ProjectsList'
 import ProjectList from './LoadMore'
 import SortList from './SortList'
+import ProjectsPreview from './Project-preview/ProjectsPreview'
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
       <button onClick={()=>{nav('/add-project')}} className='btn-primary btn'>Add New Project</button>
     </div>
     <SortList/>
+    <ProjectsPreview/>
     </div>
   )
 }

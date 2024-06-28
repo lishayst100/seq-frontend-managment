@@ -12,6 +12,7 @@ import { BASE_URL } from "../../services/utils";
 import CheckBox from "./CheckBox";
 import UploadFrontImage from "./UploadFrontImage";
 import './../home/Home.scss';
+import Loop from "./Loop";
 
 const AddProject = () => {
   const [images, setImages] = useState([]);
@@ -118,18 +119,7 @@ const AddProject = () => {
         {supplementaryVideos.length > 0 && (
           <UploadImage setImages={setFrontImages} images={frontImages} />
         )}
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="loopCheckbox"
-            checked={isLooping}
-            onChange={() => setIsLooping(!isLooping)}
-          />
-          <label className="form-check-label" htmlFor="loopCheckbox">
-            Loop Video
-          </label>
-        </div>
+        <Loop isLooping={isLooping} setIsLooping={setIsLooping}/>
       </form>
     </div>
   );

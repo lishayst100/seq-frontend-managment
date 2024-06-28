@@ -10,14 +10,15 @@ import { BASE_URL } from '../../services/utils';
 const ArrangeItemsComponent = () => {
     
    
-    const [items, setItems] = useState([]);
+    /* const [items, setItems] = useState([]); */
+    const {projects,setProjects,getProjects} = useContext(ProjectContext);
     const nav = useNavigate()
-    const getProjects = () => {
+    /* const getProjects = () => {
       fetch(`${BASE_URL}/api/projects/getProjects`)
       .then(res => res.json())
       .then(result => setItems(result))
       .catch(e => console.log(e))
-  }
+  } */
 
     useEffect(()=>{
       
@@ -29,7 +30,7 @@ const ArrangeItemsComponent = () => {
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
-    const updatedItems = Array.from(items);
+    const updatedItems = Array.from(projects);
     const [movedItem] = updatedItems.splice(result.source.index, 1);
     updatedItems.splice(result.destination.index, 0, movedItem);
 
@@ -38,7 +39,7 @@ const ArrangeItemsComponent = () => {
       item.linkId = index;
     });
 
-    setItems(updatedItems);
+    setProjects(updatedItems);
   };
 
   const saveOrder = async () => {
@@ -49,7 +50,7 @@ const ArrangeItemsComponent = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          arrangedData: items,
+          arrangedData: projects,
         }),
       });
 
@@ -77,7 +78,7 @@ const ArrangeItemsComponent = () => {
           <Droppable droppableId="arrangeItems">
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps} className=' d-flex flex-column gap-3'>
-                {items.sort((a,b)=> a.linkId - b.linkId).map((item, index) => (
+                {projects.sort((a,b)=> a.linkId - b.linkId).map((item, index) => (
                   <Draggable key={item._id} draggableId={item._id} index={index}>
                     {(provided) => (
                       <div
