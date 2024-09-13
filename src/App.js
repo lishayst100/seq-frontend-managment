@@ -17,6 +17,9 @@ import EditTeam from './components/team/EditTeam';
 import AddText from './components/textAbout/AddText';
 import GetText from './components/textAbout/GetTextt';
 import EditText from './components/textAbout/EditTextt';
+import AddShowreel from './components/showreel/AddShowreel';
+import GetShowreel from './components/showreel/GetShowreel';
+import EditShowreel from './components/showreel/EditShowreel';
 
 
 
@@ -47,6 +50,11 @@ function App() {
         <Route path='/add-text' element={<AddText/>}/>
         <Route path='/text' element={<GetText/>}/>
         <Route path='/edit-text/:id' element={<EditText/>}/>
+        {/* Showreel */}
+        <Route path='/add-showreel' element={<AddShowreel/>}/>
+        <Route path='/showreel' element={<GetShowreel/>}/>
+        <Route path='/edit-showreel/:id' element={<EditShowreel/>}/>
+
       </Routes>
       {/* <ImageUpload/> */}
       
