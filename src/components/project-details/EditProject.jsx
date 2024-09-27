@@ -215,6 +215,9 @@ const handleRemovePreviewImage = (index) => {
         <UploadMultipleVideos setVideos={setSupplementaryVideos}/>
         
         {supplementaryVideos.length > 0 && <UploadImage images={frontImagesVideos} setImages={setFrontImagesVideos}/>}
+        {urlVideos.length > 0 && <UploadImage images={frontImagesVideos} setImages={setFrontImagesVideos} title="Upload preview video images"/>}
+
+
         <div className="form-group">
           <label>
             <input
@@ -233,7 +236,7 @@ const handleRemovePreviewImage = (index) => {
         <UrlImages handleRemoveImage={handleRemoveImage} urlImages={urlImages}/>
         
         
-        <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos}/>
+        <UrlVideos handleRemoveVideo={handleRemoveVideo} urlVideos={urlVideos} posters={frontImagesVideosUrl}/>
        <UrlImages urlImages={frontImagesVideosUrl} handleRemoveImage={handleRemoveFrontImageVideo}/>
         <div className='container'>
         <video src={link} controls className='w-75'></video>

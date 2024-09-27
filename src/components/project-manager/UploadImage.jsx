@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const UploadImage = ({ setImages, images }) => {
+const UploadImage = ({ setImages, images, title }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
 
   const handleFileChange = (event) => {
@@ -34,7 +34,7 @@ const UploadImage = ({ setImages, images }) => {
 
   return (
     <div className='d-flex flex-column'>
-      <div className='text-center label-title '>Upload Images:</div>
+      <div className='text-center label-title '>{title}</div>
       <input
         className='form-control'
         type="file"

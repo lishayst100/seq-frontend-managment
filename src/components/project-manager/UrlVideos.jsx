@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UrlVideos = ({ urlVideos, handleRemoveVideo }) => {
+const UrlVideos = ({ urlVideos, handleRemoveVideo,posters }) => {
   return (
     <div>
       <h4>Current Videos</h4>
@@ -13,6 +13,7 @@ const UrlVideos = ({ urlVideos, handleRemoveVideo }) => {
                 src={video}
                 controls
                 style={{ marginRight: '10px', maxWidth: '100%', objectFit: 'cover' }}
+                poster={posters[index]}
               />
             </div>
           </div>

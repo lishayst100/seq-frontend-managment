@@ -113,11 +113,12 @@ const AddProject = () => {
         <TextArea setState={setCredits} value={credits} label={"Credits"} />
         <CheckBox checkGenres={checkGenres} setCheckGenres={setCheckGenres} />
         <UploadFrontImage setImage={setFrontImage} />
-        <UploadImage setImages={setImages} images={images} />
+        <UploadImage setImages={setImages} images={images} title="Upload preview Images"/>
         <UploadVideo setVideo={setVideo} label="Main Video" />
         <UploadMultipleVideos setVideos={setSupplementaryVideos} />
+
         {supplementaryVideos.length > 0 && (
-          <UploadImage setImages={setFrontImages} images={frontImages} />
+          <UploadImage setImages={setFrontImages} images={frontImages} title="Upload preview video Images"/>
         )}
         <Loop isLooping={isLooping} setIsLooping={setIsLooping}/>
       </form>
