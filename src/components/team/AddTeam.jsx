@@ -13,9 +13,19 @@ import UploadImage from "../project-manager/UploadImage";
 
 const AddTeam = () => {
   const [images, setImages] = useState([]);
+  const [team, setTeam] = useState([]);
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+
+  
+
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/api/team`).then(res=> res.json()).then(result => setTeam(result))
+    
+  }, []);
+
   
   
  
@@ -40,6 +50,7 @@ const AddTeam = () => {
     formData.append("title", title);
     formData.append("name", name);
     formData.append("desc", desc);
+    formData.append("linkId", team.length+1);
 
 
     try {

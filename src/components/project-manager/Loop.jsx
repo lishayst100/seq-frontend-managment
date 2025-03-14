@@ -10,7 +10,7 @@ const Loop = ({isLooping,setIsLooping}) => {
             type="checkbox"
             className="form-check-input"
             id="loopCheckbox"
-            checked={isLooping}
+            checked={isLooping === undefined ? false : isLooping}
             onChange={() => setIsLooping(!isLooping)}
           />
           

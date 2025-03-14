@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BASE_URL} from '../../services/utils'
 import { useNavigate } from 'react-router-dom'
 import DeleteBtn from './DeleteBtn'
+import SortTeam from '../home/Project-preview/SortTeam'
 
 const GetTeam = () => {
     const [team, setTeam] = useState([])
@@ -21,10 +22,11 @@ const GetTeam = () => {
         <button onClick={()=>{nav('/add-team')}} className='btn btn-primary my-5'>Add New Team Member</button>
 
         <div className='container mx-auto d-flex gap-3 justify-content-center align-items-center flex-wrap '>
+            <SortTeam/>
 
         
 
-        {
+        {/* {
             team.map( t => (
                 <div key={t._id} className='shadow-lg p-4 d-flex flex-column justify-content-center align-items-center gap-3'>
                     <p>{t.name}</p>
@@ -40,7 +42,7 @@ const GetTeam = () => {
 
                 </div>
             ))
-        }
+        } */}
         </div>
     </div>
   )

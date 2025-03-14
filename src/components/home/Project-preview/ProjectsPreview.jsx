@@ -6,7 +6,8 @@ import { ProjectContext } from "../../../context/ProjectContext";
 
 
 
-const ProjectsPreview = () => {
+const 
+ProjectsPreview = () => {
   const {projects,isLoading} = useContext(ProjectContext)
 
 
